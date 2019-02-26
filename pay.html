@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+  <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<!-- 啟用360瀏覽器的極速模式(webkit) -->
+	<meta name="renderer" content="webkit">
+	<!-- 避免IE使用兼容模式 -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- 針對手持設備優化，主要是針對一些老的不識別viewport的瀏覽器，比如黑莓 -->
+	<meta name="HandheldFriendly" content="true">
+	<!-- 微軟的老式瀏覽器 -->
+	<meta name="MobileOptimized" content="320">
+	<!-- uc強制豎屏 -->
+	<meta name="screen-orientation" content="portrait">
+	<!-- QQ強制豎屏 -->
+	<meta name="x5-orientation" content="portrait">
+	<!-- UC強制全屏 -->
+	<meta name="full-screen" content="yes">
+	<!-- QQ強制全屏 -->
+	<meta name="x5-fullscreen" content="true">
+	<!-- UC應用模式 -->
+	<meta name="browsermode" content="application">
+	<!-- QQ應用模式 -->
+	<meta name="x5-page-mode" content="app">
+	<!-- windows phone 點擊無高光 -->
+	<meta name="msapplication-tap-highlight" content="no">
+	<!-- 適應移動端end -->
+  <title>lipstick_webui</title>
+  <link rel="stylesheet" href="./css/index.css?v=1" />
+  <script>
+    (function () {
+        var valueLocal = localStorage.getItem("user");
+        if (!valueLocal) {
+          window.stop();
+          window.location.href = "/login.html"
+        }
+      })()
+  </script>
+</head>
+
+<body id="pay">
+  <div id="user-b">
+    <!--html5 nav-->
+    <nav class="j-nav navbar">
+      <div class="logo fl">
+        <a href="./user.html"></a>
+      </div>
+      <span class="user-title">充值中心</span>
+    </nav>
+    <!-- 支付拼團 -->
+    <div class="pay-box section-top">
+      <!-- 支付方式 -->
+      <div class="pay-m loading-hide">
+        <!-- <form class="am-form"> -->
+          <div class="am-g clearfix">
+            <div class="pay-mu">
+              <div class="pay-input-group pay-input-group-success google-play">
+                <button class="google-play-btn" disabled="disabled" id="buy-product-1" data-product-id="1" style="background: url(/images/pay30.png) no-repeat;background-size: 100% 100%"></button>
+              </div>
+            </div>
+            <div class="pay-mu">
+              <div class="pay-input-group pay-input-group-success google-play">
+                <button class="google-play-btn" disabled="disabled"  id="buy-product-2" data-product-id="2" style="background: url(/images/pay135.png) no-repeat;background-size: 100% 100%"></button>
+              </div>
+            </div>
+          </div>
+          <div class="am-g clearfix">
+            <div class="pay-mu">
+              <div class="pay-input-group pay-input-group-success google-play">
+                <button class="google-play-btn" disabled="disabled"   id="buy-product-3" data-product-id="3" style="background: url(/images/pay310.png) no-repeat;background-size: 100% 100%"></button>
+              </div>
+            </div>
+            <div class="pay-mu">
+              <div class="pay-input-group pay-input-group-success google-play">
+                <button class="google-play-btn"  disabled="disabled" id="buy-product-4" data-product-id="4" style="background: url(/images/pay400.png) no-repeat;background-size: 100% 100%"></button>
+              </div>
+            </div>
+          </div>
+          <div class="am-g clearfix">
+            <div class="pay-mu">
+              <div class="pay-input-group pay-input-group-success google-play">
+                <button class="google-play-btn" disabled="disabled"  id="buy-product-5" data-product-id="5" style="background: url(/images/pay900.png) no-repeat;background-size: 100% 100%"></button>
+              </div>
+            </div>
+            <div class="pay-mu">
+              <div class="pay-input-group pay-input-group-success google-play">
+                <button class="google-play-btn" disabled="disabled"  id="buy-product-6" data-product-id="6" style="background: url(/images/pay1500.png) no-repeat;background-size: 100% 100%"></button>
+              </div>
+            </div>
+          </div>
+        <!-- </form> -->
+      </div>
+      <div class="loading-show"><img src="/images/loading.gif" alt=""></div>
+    </div>
+  </div>
+</body>
+<script src="/js/jquery.min.js"></script>
+<script src="/cordova.js"></script>
+<!-- <script type="text/javascript">
+  var debug = function (text) {
+    var debug_element = document.getElementById('debug');
+    var old_text = debug_element.innerHTML;
+    debug_element.innerHTML = text + '\n' + old_text;
+  };
+
+  var print = function (o) {
+    if (o === undefined) {
+      return '<undefined>';
+    };
+    if (o === null) {
+      return '<null>';
+    };
+    var str = '';
+
+    for (var p in o) {
+      if (typeof o[p] == 'string') {
+        str += p + ': ' + o[p] + '; </br>';
+      } else {
+        if (p == o) {
+          str += '[' + p + ']';
+        } else {
+          str += p + ': { </br>' + print(o[p]) + '}';
+        };
+      };
+      console.log(str);
+    };
+
+    return str;
+  };
+
+  $(function () {
+    // document.getElementById('debug').innerHTML = '';
+    debug('--started--');
+
+  });
+</script> -->
+<script src="/js/index.js"></script>
+
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!-- 啟用360瀏覽器的極速模式(webkit) -->
+    <meta name="renderer" content="webkit">
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 針對手持設備優化，主要是針對一些老的不識別viewport的瀏覽器，比如黑莓 -->
+    <meta name="HandheldFriendly" content="true">
+    <!-- 微軟的老式瀏覽器 -->
+    <meta name="MobileOptimized" content="320">
+    <!-- uc強制豎屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ強制豎屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- UC強制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- QQ強制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- UC應用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- QQ應用模式 -->
+    <meta name="x5-page-mode" content="app">
+    <!-- windows phone 點擊無高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <!-- 適應移動端end -->
+    <title>lipstick_webui</title>
+    <link rel="shortcut icon" href="./images/icon.png" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/ui.css">
+    <link rel="stylesheet" href="./css/frameui.css" />
+    <link rel="stylesheet" href="./css/widget/slider.css" />
+    <link rel="stylesheet" href="./css/index.css?v=1" />
+    <script>
+        (function () {
+            var valueLocal = localStorage.getItem("user");
+            if (!valueLocal) {
+                window.stop();
+                window.location.href = "/login.html"
+            }
+        })()
+    </script>
+</head>
+
+<body>
+    <!--html5 nav-->
+    <nav class="j-nav navbar index-nav">
+        <div class="logo">
+            <a href="/"><img src="/images/logo.png" alt=""></a>
+        </div>
+    </nav>
+    <!--a1輪播圖-->
+    <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{"directionNav":false}'>
+        <ul class="am-slides cl">
+            <li>
+                <img src="/images/banner.png">
+            </li>
+            <li>
+                <img src="/images/baner2.png">
+            </li>
+        </ul>
+    </div>
+    <div class="j-hint"></div>
+    <div class="j-component-func" id="m-banner">
+        <!-- <ul class="list-unstyled" id="categoryMenu">
+            <li class="route1 "><a href="./register.html"><span class="glyphicon fdayicon fdayicon-all"></span>新用戶</a></li>
+            <li class="route2 "><a href="./meal.html"><span class="glyphicon fdayicon fdayicon-order"></span>套餐</a></li>
+            <li class="route3 "><a href="./invite.html"><span class="glyphicon fdayicon fdayicon-contact"></span>邀請紅包</a></li>
+            <li class="route4 "><a href="./#"><span class="glyphicon fdayicon fdayicon-client"></span>企業團購</a></li>
+        </ul> -->
+    </div>
+    <!--內容-->
+    <!-- <div class="j-component-bestsell">
+        <ul class="list-unstyled">
+            <li><a href="/"><img class="lazy" src="././images/j-c03.jpg"></a></li>
+        </ul>
+    </div> -->
+
+    <div id="tuan" class="tuan">
+        <div class="aui-flex">
+            <div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+                <div>
+                    <img class="shop-img" src="././images/M.A.C.png">
+                </div>
+                <div class="aui-flex-box">
+                    <h2>M.A.C-魅可秋冬色號</h2>
+                    <div class="tuan_g_title">
+                        <div class="start_m"><span>NT$170元</span></div>
+                        <div class="tuan_g_btn start_btn" data-id="1" data-price="799">799金</div>
+                    </div>
+                </div>
+            </div>
+            <div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+                <div>
+                    <img class="shop-img" src="././images/Givenchy.png">
+                </div>
+                <div class="aui-flex-box">
+                    <h2>Givenchy-紀梵希小羊皮
+                    </h2>
+                    <div class="tuan_g_title">
+                        <div class="start_m"><span>NT$270元</span></div>
+                        <div class="tuan_g_btn start_btn" data-id="2" data-price="1300">1300金</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="aui-flex">
+            <div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+                <div>
+                    <img class="shop-img" src="././images/Dior.jpg">
+                </div>
+                <div class="aui-flex-box">
+                    <h2>Dior-烈艷藍金摯紅唇膏
+                    </h2>
+                    <div class="tuan_g_title">
+                        <div class="start_m"><span>NT$320元</span></div>
+                        <div class="tuan_g_btn start_btn" data-id="3" data-price="1460">1460金</div>
+                    </div>
+                </div>
+            </div>
+            <div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+                <div>
+                    <img class="shop-img" src="././images/YSL.jpg">
+                </div>
+                <div class="aui-flex-box">
+                    <h2>YSL-奢華緞面漆光唇釉
+                    </h2>
+                    <div class="tuan_g_title">
+                        <div class="start_m"><span>NT$320元</span></div>
+                        <div class="tuan_g_btn start_btn" data-id="4" data-price="1460">1460金</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="aui-flex">
+            <div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+                <div>
+                    <img class="shop-img" src="././images/CHANEL.png">
+                </div>
+                <div class="aui-flex-box">
+                    <h2>CHANEL-極緻啞光柔滑唇膏
+                    </h2>
+                    <div class="tuan_g_title">
+                        <div class="start_m"><span>NT$298元</span></div>
+                        <div class="tuan_g_btn start_btn" data-id="5" data-price="1360">1360金</div>
+                    </div>
+                </div>
+            </div>
+            <div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+                <div>
+                    <img class="shop-img" src="././images/OPEAR.png">
+                </div>
+                <div class="aui-flex-box">
+                    <h2>OPEAR-瑩潤滋養唇膏
+                    </h2>
+                    <div class="tuan_g_title">
+                        <div class="start_m"><span>NT$158元</span></div>
+                        <div class="tuan_g_btn start_btn" data-id="6" data-price="800">800金</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="aui-flex">
+            <div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+                <div>
+                    <img class="shop-img" src="././images/Innisfree.png">
+                </div>
+                <div class="aui-flex-box">
+                    <h2>Innisfree-蜜吻真彩淇淋唇膏
+                    </h2>
+                    <div class="tuan_g_title">
+                        <div class="start_m"><span>NT$110元</span></div>
+                        <div class="tuan_g_btn start_btn" data-id="7" data-price="600">600金</div>
+                    </div>
+                </div>
+            </div>
+            <div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+                <div>
+                    <img class="shop-img" src="././images/Armani.png">
+                </div>
+                <div class="aui-flex-box">
+                    <h2>Armani-臻致唇釉紅管
+
+                    </h2>
+                    <div class="tuan_g_title">
+                        <div class="start_m"><span>NT$388元</span></div>
+                        <div class="tuan_g_btn start_btn" data-id="8" data-price="1770">1770金</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="aui-flex">
+            <div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+                <div>
+                    <img class="shop-img" src="././images/Armani_2.png">
+                </div>
+                <div class="aui-flex-box">
+                    <h2>Armani-漆光迷情唇釉
+                    </h2>
+                    <div class="tuan_g_title">
+                        <div class="start_m"><span>NT$310元</span></div>
+                        <div class="tuan_g_btn start_btn" data-id="9" data-price="1410">1410金</div>
+                    </div>
+                </div>
+            </div>
+            <div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+                <div>
+                    <img class="shop-img" src="././images/Revlon.png">
+                </div>
+                <div class="aui-flex-box">
+                    <h2>Revlon-麗彩炫亮黑管唇膏
+                    </h2>
+                    <div class="tuan_g_title">
+                        <div class="start_m"><span>NT$55元</span></div>
+                        <div class="tuan_g_btn start_btn" data-id="10" data-price="260">260金</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="aui-flex">
+            <div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+                <div>
+                    <img class="shop-img" src="././images/Guerlain.png">
+                </div>
+                <div class="aui-flex-box">
+                    <h2>Guerlain-親親唇膏
+                    </h2>
+                    <div class="tuan_g_title">
+                        <div class="start_m"><span>NT$239元</span></div>
+                        <div class="tuan_g_btn start_btn" data-id="11" data-price="1090">1090金</div>
+                    </div>
+                </div>
+            </div>
+            <div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+                <div>
+                    <img class="shop-img" src="././images/Carslan.png">
+                </div>
+                <div class="aui-flex-box">
+                    <h2>Carslan-金致膠原美芯唇膏
+                    </h2>
+                    <div class="tuan_g_title">
+                        <div class="start_m"><span>NT$99元</span></div>
+                        <div class="tuan_g_btn start_btn" data-id="12" data-price="500">500金</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="aui-flex">
+            <div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+                <div>
+                    <img class="shop-img" src="././images/NARS.png">
+                </div>
+                <div class="aui-flex-box">
+                    <h2>NARS-絲絨唇膏筆
+                    </h2>
+                    <div class="tuan_g_title">
+                        <div class="start_m"><span>NT$188元</span></div>
+                        <div class="tuan_g_btn start_btn" data-id="13" data-price="860">860金</div>
+                    </div>
+                </div>
+            </div>
+            <div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+                <div>
+                    <img class="shop-img" src="././images/LOREAL.png">
+                </div>
+                <div class="aui-flex-box">
+                    <h2>LOREAL-紛澤唇膏
+                    </h2>
+                    <div class="tuan_g_title">
+                        <div class="start_m"><span>NT$125元</span></div>
+                        <div class="tuan_g_btn start_btn" data-id="14" data-price="600">600金</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="aui-flex">
+            <div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+                <div>
+                    <img class="shop-img" src="././images/Dior.png">
+                </div>
+                <div class="aui-flex-box">
+                    <h2>Dior-迪奧魅惑740
+                    </h2>
+                    <div class="tuan_g_title">
+                        <div class="start_m"><span>NT$220元</span></div>
+                        <div class="tuan_g_btn start_btn" data-id="15" data-price="1005">1005金</div>
+                    </div>
+                </div>
+            </div>
+            <div class="aui-flex-item aui-flex-items1 aui-flex-items2">
+                <div>
+                    <img class="shop-img" src="././images/Shu-uemura.png">
+                </div>
+                <div class="aui-flex-box">
+                    <h2>Shu-uemura-經典柔霧質感
+                    </h2>
+                    <div class="tuan_g_title">
+                        <div class="start_m"><span>NT$199元</span></div>
+                        <div class="tuan_g_btn start_btn" data-id="16" data-price="910">910金</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="tuan_g col-sm-4" data-vtuan="0" data-cat="1" data-num="12058">
+            <i></i>
+            <a href="./detail.html">
+                <div class="tuan_g_img">
+                    <div class="tally_box">
+                        <p>3人團</p>
+                        <p>2.5折</p>
+                    </div>
+                    <img src="././images/j-c01.jpg">
+                </div>
+                <div class="tuan_g_info">
+                    <p class="tuan_g_name">越南進口火龍果（2粒）【直降2.80元】 </p>
+                    <p style="display: black;" class="tuan_g_cx">
+                        外皮紅艷張揚，果肉綿軟白嫩，汁液豐富，富含維生素C，豐富的水溶性膳食纖維，前者美白皮膚，後者有助減肥，降血糖，潤腸，預防腸癌，美容瘦身。
+                    </p>
+                </div>
+
+                <div class="tuan_g_core">
+                    <div id="triangle-right"></div>
+                    <div class="tuan_g_price">
+                        <span>3人團只需</span>
+                        <b>NT$14.00</b>
+                    </div>
+                    <div class="tuan_g_btn">我要拼</div>
+                </div>
+                <div class="tuan_g_yj"><s>原價:￥16.80</s></div>
+            </a>
+        </div> -->
+    </div>
+    <!--footer begin-->
+    <footer class="footer">
+        <nav>
+            <ul>
+                <li><a href="/" class="nav-controller active">
+                        <div class="fb-home"></div>首頁
+                    </a></li>
+                <!-- <li><a href="./groups.html" class="nav-controller">
+                        <div class="fb-group"></div>我的拼團
+                    </a></li> -->
+                <li><a href="./myorder.html" class="nav-controller">
+                        <div class="fb-list"></div>我的獎品
+                    </a></li>
+                <li><a href="./user.html" class="nav-controller">
+                        <div class="fb-user"></div>個人中心
+                    </a></li>
+            </ul>
+        </nav>
+    </footer>
+    <!--footer end-->
+
+    <!--引入js資源-->
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/amazeui.js"></script>
+    <script src="./js/handlebars.min.js"></script>
+    <script src="./js/amazeui.widgets.helper.js"></script>
+    <script type="text/javascript">
+        (function () {
+            var result_Local = localStorage.getItem("result");
+            if (result_Local) {
+                var game_result = localStorage.getItem("game_result");
+                if (game_result == "win") {
+                    var result_Local_json = JSON.parse(result_Local);
+                    var game_session = result_Local_json.game_session;
+                    var valueLocal = localStorage.getItem("user");
+                    var serializedData_json = JSON.stringify(serializedData);
+                    var valueLocal_json = JSON.parse(valueLocal);
+                    var user_token = valueLocal_json.token;
+                    $.ajax({
+                        url: '/api/game/end',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            "win": true,
+                            "game_session": game_session,
+                        }),
+                        beforeSend: function (request) {
+                            request.setRequestHeader("Authorization", "Bearer " + user_token);
+                        },
+                        // headers: {
+                        //     'Authorization': 'Bearer ' + valueLocal,
+                        // },
+                        success: function (data, textStatus, jqXHR) {
+                            window.location.href = "/myorder.html";
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log(errorThrown)
+                        }
+
+                    }).always(function (data_jqXHR, textStatus, jqXHR_errorThrown) {
+                        // $this.attr("disabled", false);
+                        $this.data('disabled', 'false');
+                    });
+                }
+            }
+            localStorage.removeItem("result");
+            localStorage.removeItem("game_result");
+            $('.start_btn').on("click", function () {
+                var $this = $(this);
+                if ($this.data('disabled') == 'true') {
+                    return;
+                }
+                // $this.attr("disabled", "disabled");
+                var prize_id = Number($(this).attr("data-id"));
+                var prize_balance = Number($(this).attr("data-price"));
+                var serializedData = {
+                    "prize_id": prize_id
+                };
+                var valueLocal = localStorage.getItem("user");
+                var serializedData_json = JSON.stringify(serializedData);
+                var valueLocal_json = JSON.parse(valueLocal);
+                var user_token = valueLocal_json.token;
+                var user_balance = valueLocal_json.balance;
+                // if(user_balance<prize_balance){
+                //     alert("餘額不足,請充值");
+                //     return false;
+                // }
+
+                $this.data('disabled', 'true');
+                console.log('prize_id', prize_id);
+                $.ajax({
+                    url: '/api/game/start',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: serializedData_json,
+                    beforeSend: function (request) {
+                        request.setRequestHeader("Authorization", "Bearer " + user_token);
+                    },
+                    // headers: {
+                    //     'Authorization': 'Bearer ' + valueLocal,
+                    // },
+                    success: function (data, textStatus, jqXHR) {
+                        var data = data;
+                        var message = data.message;
+                        if (data.status != 0) {
+                            alert(message);
+                            return false;
+                        }
+                        var result = data.result;
+                        var result_json = JSON.stringify(result);
+                        localStorage.setItem("result", result_json);
+                        var result_Local = localStorage.getItem("result");
+                        console.log('result_Local', result_Local)
+                        var result_Local_json = JSON.parse(result_Local);
+                        window.location.href = "/game/";
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(errorThrown)
+                    }
+
+                }).always(function (data_jqXHR, textStatus, jqXHR_errorThrown) {
+                    // $this.attr("disabled", false);
+                    $this.data('disabled', 'false');
+                });
+            })
+        })()
+    </script>
+</body>
+
+</html>

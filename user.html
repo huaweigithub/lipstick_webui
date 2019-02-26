@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<!-- 啟用360瀏覽器的極速模式(webkit) -->
+	<meta name="renderer" content="webkit">
+	<!-- 避免IE使用兼容模式 -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- 針對手持設備優化，主要是針對一些老的不識別viewport的瀏覽器，比如黑莓 -->
+	<meta name="HandheldFriendly" content="true">
+	<!-- 微軟的老式瀏覽器 -->
+	<meta name="MobileOptimized" content="320">
+	<!-- uc強制豎屏 -->
+	<meta name="screen-orientation" content="portrait">
+	<!-- QQ強制豎屏 -->
+	<meta name="x5-orientation" content="portrait">
+	<!-- UC強制全屏 -->
+	<meta name="full-screen" content="yes">
+	<!-- QQ強制全屏 -->
+	<meta name="x5-fullscreen" content="true">
+	<!-- UC應用模式 -->
+	<meta name="browsermode" content="application">
+	<!-- QQ應用模式 -->
+	<meta name="x5-page-mode" content="app">
+	<!-- windows phone 點擊無高光 -->
+	<meta name="msapplication-tap-highlight" content="no">
+	<!-- 適應移動端end -->
+	<title>lipstick_webui</title>
+	<link rel="shortcut icon" href="./images/icon.png" />
+	<link rel="stylesheet" href="./css/index.css" />
+	<script>
+		(function () {
+			var valueLocal = localStorage.getItem("user");
+			if (!valueLocal) {
+				window.stop();
+				window.location.href = "/login.html"
+			}
+		})()
+	</script>
+</head>
+
+<body>
+	<div id="user-b">
+		<!--html5 nav-->
+		<nav class="j-nav navbar">
+			<!-- <div class="logo fl">
+				<a href="./index.html"></a>
+			</div> -->
+			<span class="user-title">個人中心</span>
+			<!-- <div class="shopping-cart fr">
+				<a href="./index.html"></a>
+			</div> -->
+		</nav>
+		<section class="m-component-user section-top" id="m-user">
+			<div class="m-user-avatar text-center">
+				<span class="avatarPic" id="avatarPic"></span>
+				<div class="user_btn" id="user_info">
+					<!-- <p class="user_name">登錄</p>
+					<p class="user_id">ID:1</p> -->
+				</div>
+			</div>
+
+			<div class="head_list">
+				<ul class="m-user-list">
+					<li id="balance"></li>
+					<li id="award"></li>
+					<!-- <li><span class="bar"></span><button class="recharge-btn">充值</button></li> -->
+					<li><span class="bar"></span><a class="recharge-btn" href="/pay.html">充值</a></li>
+				</ul>
+			</div>
+			<ul class="m-user-content">
+				<li>
+					<div class="m-user-item">
+						<a href="./orderdetails.html" class="user-order">管理收貨地址</a>
+					</div>
+					<div class="m-user-item">
+						<a href="./myorder.html" class="user-coupon">我的獎品</a>
+					</div>
+					<div class="login_out"><button class="login_out_btn" onclick="deleteItem()">退出登錄</button></div>
+				</li>
+			</ul>
+		</section>
+		<!--footer begin-->
+		<footer class="footer">
+			<nav>
+				<ul>
+					<li><a href="./index.html" class="nav-controller">
+							<div class="fb-home"></div>首頁
+						</a></li>
+					<!-- <li><a href="./groups.html" class="nav-controller"><div class="fb-group"></div>我的拼團</a></li> -->
+					<li><a href="./myorder.html" class="nav-controller">
+							<div class="fb-list"></div>我的獎品
+						</a></li>
+					<li><a href="./user.html" class="nav-controller active">
+							<div class="fb-user"></div>個人中心
+						</a></li>
+				</ul>
+			</nav>
+		</footer>
+		<!--footer end-->
+	</div>
+	<script src="./js/jquery.min.js"></script>
+	<script>
+		(function () {
+			var valueLocal = localStorage.getItem("user");
+			var valueLocal_json = JSON.parse(valueLocal);
+			var user_token = valueLocal_json.token;
+
+			$.ajax({
+				url: '/api/user',
+				type: 'GET',
+				contentType: 'application/json',
+				beforeSend: function (request) {
+					request.setRequestHeader("Authorization", "Bearer " + user_token);
+				},
+				success: function (data, textStatus, jqXHR) {
+					var result = data.result;
+					var user_result = JSON.stringify(result);
+					localStorage.setItem("user", user_result);
+					var valueLocal = localStorage.getItem("user");
+					var valueLocal_json = JSON.parse(valueLocal);
+					// var user_html = '';
+					// user_html +=
+					// 	'<p class="user_name">' + valueLocal_json.nickname + '</p>' +
+					// 	'<p class="user_id">ID: ' + valueLocal_json.id + '</p>';
+					// $("#user_info").append(user_html);
+					var balance_html = "";
+					balance_html += '<span>' + (valueLocal_json.balance ? valueLocal_json.balance : 0) + '</span><br>賬戶餘額';
+					$("#balance").html(balance_html);
+
+					console.log('user balance', valueLocal_json.balance);
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					console.log(errorThrown)
+				}
+			});
+
+			$.ajax({
+				url: '/api/award',
+				type: 'GET',
+				contentType: 'application/json',
+				beforeSend: function (request) {
+					request.setRequestHeader("Authorization", "Bearer " + user_token);
+				},
+				success: function (data, textStatus, jqXHR) {
+					var result = data.result;
+					var award_result = JSON.stringify(result);
+					localStorage.setItem("award", award_result);
+					var award = localStorage.getItem("award");
+					var award_json = JSON.parse(award);
+					var award_html = "";
+					award_html += '<a href="./myorder.html"><span class="bar"></span><span>' + award_json.length +
+						'</span><br>我的獎品</a>';
+					$("#award").html(award_html);
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					console.log(errorThrown)
+				}
+			});
+
+			var award = localStorage.getItem("award");
+			var award_json = JSON.parse(award);
+			var user_html = '';
+			user_html +=
+				'<p class="user_name">' + valueLocal_json.nickname + '</p>' +
+				'<p class="user_id">ID: ' + valueLocal_json.id + '</p>';
+			$("#user_info").append(user_html);
+			var balance_html = "";
+			balance_html += '<span>' + (valueLocal_json.balance ? valueLocal_json.balance : 0) + '</span><br>賬戶餘額';
+			$("#balance").html(balance_html);
+			var award_html = "";
+			award_html += '<a href="./myorder.html"><span class="bar"></span><span>' + award_json.length +
+				'</span><br>我的獎品</a>';
+			$("#award").html(award_html);
+
+			var avatar_html = "";
+			img_url = "/images/user-img0.jpg";
+			avatar_html += '<img style="display: inline;" class="lazy img-circle" src=" ' + (valueLocal_json.avatar ? valueLocal_json.avatar : img_url ) + ' ">';
+			$("#avatarPic").html(avatar_html);
+		})();
+
+		function deleteItem() {
+			localStorage.removeItem('user');
+			window.stop();
+			window.location.href = "/login.html";
+		}
+	</script>
+</body>
+
+</html>

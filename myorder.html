@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<!-- 啟用360瀏覽器的極速模式(webkit) -->
+	<meta name="renderer" content="webkit">
+	<!-- 避免IE使用兼容模式 -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- 針對手持設備優化，主要是針對一些老的不識別viewport的瀏覽器，比如黑莓 -->
+	<meta name="HandheldFriendly" content="true">
+	<!-- 微軟的老式瀏覽器 -->
+	<meta name="MobileOptimized" content="320">
+	<!-- uc強制豎屏 -->
+	<meta name="screen-orientation" content="portrait">
+	<!-- QQ強制豎屏 -->
+	<meta name="x5-orientation" content="portrait">
+	<!-- UC強制全屏 -->
+	<meta name="full-screen" content="yes">
+	<!-- QQ強制全屏 -->
+	<meta name="x5-fullscreen" content="true">
+	<!-- UC應用模式 -->
+	<meta name="browsermode" content="application">
+	<!-- QQ應用模式 -->
+	<meta name="x5-page-mode" content="app">
+	<!-- windows phone 點擊無高光 -->
+	<meta name="msapplication-tap-highlight" content="no">
+	<!-- 適應移動端end -->
+	<title>lipstick_webui</title>
+	<link rel="shortcut icon" href="./images/icon.png" />
+	<link rel="stylesheet" href="./css/index.css?v=1" />
+	<script>
+		(function () {
+			var valueLocal = localStorage.getItem("user");
+			if (!valueLocal) {
+				window.stop();
+				window.location.href = "/login.html"
+			}
+		})()
+	</script>
+</head>
+
+<body>
+	<div id="user-b">
+		<!--html5 nav-->
+		<nav class="j-nav navbar">
+			<!-- <div class="logo fl">
+				<a href="./user.html"></a>
+			</div> -->
+			<span class="user-title">我的獎品</span>
+			<!-- <div class="shopping-cart fr">
+				<a href="./index.html"></a>
+			</div> -->
+		</nav>
+		<div class="myorder-tab section-top">
+			<!-- <div class="myorder-nav">
+				<ul id="tab_btn" class="coupon-list">
+					<li class="pick">全部訂單</li>
+					<li><span class="bar"></span>待付款</li>
+					<li><span class="bar"></span>待收貨</li>
+				</ul>
+				<div class="cl"></div>
+			</div> -->
+			<div class="myorder-content">
+				<div id="no-award">
+					<p class='no-award'>你離獎品就差那麼一點點...</p>
+				</div>
+				<ul>
+					<li class="mc-all cc-one">
+						<ul id="award-list">
+							<!-- <li>
+								<div class="mc-sum-box">
+									<div class="myorder-sum fl"><img src="./images/pay1.jpg"></div>
+									<div class="myorder-text">
+										<h1>越南進口白肉火龍果</h1>
+										<h2>價格:14.00/只</h2>
+										<div class="myorder-cost">
+											<span>數量:1</span>
+										</div>
+									</div>
+								</div>
+								<div class="mc-sum-Am clearfix">
+									<span class="shipped">已發貨</span>
+									<span class="mc-t">中獎時間:2019-01-27 05:38:06</span>
+								</div>
+							</li> -->
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--footer begin-->
+		<footer class="footer">
+			<nav>
+				<ul>
+					<li><a href="./index.html" class="nav-controller">
+							<div class="fb-home"></div>首頁
+						</a></li>
+					<!-- <li><a href="./groups.html" class="nav-controller"><div class="fb-group"></div>我的拼團</a></li> -->
+					<li><a href="./myorder.html" class="nav-controller active">
+							<div class="fb-list"></div>我的獎品
+						</a></li>
+					<li><a href="./user.html" class="nav-controller">
+							<div class="fb-user"></div>個人中心
+						</a></li>
+				</ul>
+			</nav>
+		</footer>
+		<!--footer end-->
+	</div>
+	<script src="./js/jquery.min.js"></script>
+	<script>
+		(function () {
+			var valueLocal = localStorage.getItem("user");
+			var valueLocal_json = JSON.parse(valueLocal);
+			var user_token = valueLocal_json.token;
+			$.ajax({
+				url: '/api/award',
+				type: 'GET',
+				contentType: 'application/json',
+				beforeSend: function (request) {
+					request.setRequestHeader("Authorization", "Bearer " + user_token);
+				},
+				success: function (data, textStatus, jqXHR) {
+					var result = data.result;
+					var result_length = data.result.length;
+					console.log('result_length',result_length)
+					if(result_length == 0){
+						$( "#no-award" ).html( "<p class='red'>你離獎品就差那麼一點點...</p>" );
+					}
+					var award_html = '';
+					for (var i = 0; i < result_length; i++) {
+						console.log(result[i].prize_name);
+						award_html += '<li>' +
+							'<div class="mc-sum-box"> ' +
+							'<div class="myorder-sum fl"><img src="./' + result[i].prize_thumbnail + '"></div>' +
+							'<div class="myorder-text">' +
+							'<h1>' + result[i].prize_name + '</h1>' +
+							'<h2>價格: ' + result[i].prize_price + '元/只</h2>' +
+							'<div class="myorder-cost">' +
+							'<span>數量:1</span>' +
+							'</div>' +
+							'</div>' +
+							'</div>' +
+							'<div class="mc-sum-Am clearfix">' +
+							'<span class="shipped">' + (result[i].shipped ? "已發貨" : "未發貨") + '</span>' +
+							'<span class="mc-t">中獎時間: ' + result[i].win_at + '</span>' +
+							'</div>' +
+							'</li>'
+					}
+					$("#award-list").append(award_html);
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					console.log(errorThrown)
+				}
+			})
+		})()
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<!-- 啟用360瀏覽器的極速模式(webkit) -->
+	<meta name="renderer" content="webkit">
+	<!-- 避免IE使用兼容模式 -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- 針對手持設備優化，主要是針對一些老的不識別viewport的瀏覽器，比如黑莓 -->
+	<meta name="HandheldFriendly" content="true">
+	<!-- 微軟的老式瀏覽器 -->
+	<meta name="MobileOptimized" content="320">
+	<!-- uc強制豎屏 -->
+	<meta name="screen-orientation" content="portrait">
+	<!-- QQ強制豎屏 -->
+	<meta name="x5-orientation" content="portrait">
+	<!-- UC強制全屏 -->
+	<meta name="full-screen" content="yes">
+	<!-- QQ強制全屏 -->
+	<meta name="x5-fullscreen" content="true">
+	<!-- UC應用模式 -->
+	<meta name="browsermode" content="application">
+	<!-- QQ應用模式 -->
+	<meta name="x5-page-mode" content="app">
+	<!-- windows phone 點擊無高光 -->
+	<meta name="msapplication-tap-highlight" content="no">
+	<!-- 適應移動端end -->
+	<title>lipstick_webui</title>
+	<link rel="stylesheet" href="./css/frameui.css" />
+	<link rel="stylesheet" href="./css/index.css" />
+	<script>
+		(function () {
+			var valueLocal = localStorage.getItem("user");
+			if (!valueLocal) {
+				window.stop();
+				window.location.href = "/login.html"
+			}
+		})()
+	</script>
+</head>
+
+<body>
+	<div id="user-b" class="od-box">
+		<!--html5 nav-->
+		<nav class="j-nav navbar">
+			<div class="logo fl">
+				<a href="/user.html"></a>
+			</div>
+			<span class="user-title">收貨地址</span>
+			<!-- <div class="shopping-cart fr">
+				<a href="./index.html"></a>
+			</div> -->
+		</nav>
+		<!-- 訂單信息 -->
+		<div class="od-infor" id="od-infor">
+			<div id="address_table"></div>
+			<div id="address-form">
+				<h3>請填寫您的收貨信息</h3>
+				<form class="am-form address-form" id="doc-vld-msg">
+					<!-- <fieldset>
+						<div class="am-form-group">
+							<label for="doc-ipt-3" class=" j-form-label">
+								姓名:
+							</label>
+							<input type="text" id="receiver" name="receiver" placeholder="請輸入收件人姓名" required />
+						</div>
+						<div class="am-form-group">
+							<label for="doc-vld-pwd-1" class=" j-form-label">
+								聯繫電話:
+							</label>
+							<input type="text" id="phone" name="phone" placeholder="請輸入收件人聯繫電話" required />
+						</div>
+						<div class="am-form-group">
+							<label for="doc-vld-pwd-1" class=" j-form-label">
+								收貨地址:
+							</label>
+							<textarea name="address" id="address-info" rows="4" placeholder="為保證獎品能快速到達您的手中,請您準確填寫收貨地址"></textarea>
+						</div>
+						<button class="btn am-btn am-btn-secondary" type="submit">保存</button>
+					</fieldset> -->
+				</form>
+			</div>
+			<!-- <table cellpadding="1" cellspacing="0">
+				<tr>
+					<td>收貨人:</td>
+					<td>郭小帥 16816816888</td>
+				</tr>
+				<tr>
+					<td>訂單編號:</td>
+					<td>20151224-714084486</td>
+				</tr>
+				<tr>
+					<td>下單時間:</td>
+					<td>2015-12-24 17:05:40</td>
+				</tr>
+			</table> -->
+		</div>
+		<!--footer begin-->
+		<footer class="footer">
+			<nav>
+				<ul>
+					<li><a href="./index.html" class="nav-controller">
+							<div class="fb-home"></div>首頁
+						</a></li>
+					<!-- <li><a href="./groups.html" class="nav-controller"><div class="fb-group"></div>我的拼團</a></li> -->
+					<li><a href="/myorder.html" class="nav-controller">
+							<div class="fb-list"></div>我的獎品
+						</a></li>
+					<li><a href="./user.html" class="nav-controller active">
+							<div class="fb-user"></div>個人中心
+						</a></li>
+				</ul>
+			</nav>
+		</footer>
+		<!--footer end-->
+	</div>
+
+	<script src="./js/jquery.min.js"></script>
+	<script>
+		(function () {
+			var valueLocal = localStorage.getItem("user");
+			var valueLocal_json = JSON.parse(valueLocal);
+			var user_token = valueLocal_json.token;
+			console.log('valueLocal_json', valueLocal_json);
+
+			var address_html = "";
+			address_html += '<table cellpadding="1" cellspacing="0">' +
+				'<tr>' +
+				'<td class="address_td">收件人:</td>' +
+				'<td>' + valueLocal_json.receiver + '</td>' +
+				'</tr>' +
+				'<tr>' +
+				'<td class="address_td">聯繫電話:</td>' +
+				'<td>' + valueLocal_json.phone + '</td>' +
+				'</tr>' +
+				'<tr>' +
+				'<td class="address_td">收件地址:</td>' +
+				'<td>' + valueLocal_json.address + '</td>' +
+				'</tr>' +
+				'</table>' +
+				'<div class="edit-adress"><button class="btn am-btn am-btn-secondary" id="edit-adress">更改我的收貨地址</button></div>';
+			if (valueLocal_json.address || valueLocal_json.phone || valueLocal_json.receiver) {
+				$("#address_table").append(address_html);
+				$("#address-form").addClass('hide');
+			}
+
+			var address_input_html = "";
+			address_input_html += '<fieldset>' +
+				'<div class="am-form-group">' +
+				'<label for="doc-ipt-3" class=" j-form-label">' +
+				'姓名:' +
+				'</label>' +
+				'<input type="text" id="receiver" name="receiver" placeholder="請輸入收件人姓名" value="'+ (valueLocal_json.receiver ? valueLocal_json.receiver : "") +'" required />' +
+				'</div>' +
+				'<div class="am-form-group">' +
+				'<label for="doc-vld-pwd-1" class=" j-form-label">' +
+				'聯繫電話:' +
+				'</label>' +
+				'<input type="text" id="phone" name="phone" placeholder="請輸入收件人聯繫電話" value="'+ (valueLocal_json.phone ? valueLocal_json.phone : "") +'" required />' +
+				'</div>' +
+				'<div class="am-form-group">' +
+				'<label for="doc-vld-pwd-1" class=" j-form-label">' +
+				'收貨地址:' +
+				'</label>' +
+				'<textarea name="address" id="address-info" rows="4" placeholder="為保證獎品能快速到達您的手中,請您準確填寫收貨地址">'+(valueLocal_json.address ? valueLocal_json.address : "")+'</textarea>' +
+				'</div>' +
+				'<button class="btn am-btn am-btn-secondary" type="submit">保存</button>' +
+				'</fieldset>';
+			$("#doc-vld-msg").append(address_input_html);
+
+			$("#edit-adress").click(function () {
+				$("#address-form").slideDown("slow");
+				// slideDown("slow")
+			})
+
+
+			var request;
+			$("#doc-vld-msg").submit(function (event) {
+				event.preventDefault();
+				if (request) {
+					request.abort();
+				}
+				var $form = $(this);
+				var $inputs = $form.find("input, select, button, textarea");
+				var receiver = $("#receiver").val();
+				var phone = $("#phone").val();
+				var address = $("#address-info").val();
+				var serializedData = {
+					"address": address,
+					"phone": phone,
+					"receiver": receiver
+				}
+				var serializedData_json = JSON.stringify(serializedData);
+				console.log('serializedData_json', serializedData_json)
+				$inputs.prop("disabled", true);
+				request = $.ajax({
+					url: "/api/user",
+					type: "post",
+					data: serializedData_json,
+					contentType: 'application/json',
+					headers: {
+						'X-HTTP-Method-Override': 'PATCH',
+						'Authorization': 'Bearer ' + user_token,
+					},
+				});
+				request.done(function (response, textStatus, jqXHR) {
+					var result = response.result;
+					var user_result = JSON.stringify(result);
+					localStorage.setItem("user", user_result);
+					var valueLocal = localStorage.getItem("user");
+					var valueLocal_json = JSON.parse(valueLocal);
+					window.location.href = '/orderdetails.html';
+					console.log('valueLocal_json ----', valueLocal_json)
+				});
+				request.fail(function (jqXHR, textStatus, errorThrown) {
+					console.error(
+						"The following error occurred: " +
+						textStatus, errorThrown
+					);
+				});
+				request.always(function () {
+					$inputs.prop("disabled", false);
+				});
+			});
+		})()
+	</script>
+</body>
+
+</html>

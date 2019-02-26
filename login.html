@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<!-- 啟用360瀏覽器的極速模式(webkit) -->
+	<meta name="renderer" content="webkit">
+	<!-- 避免IE使用兼容模式 -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- 針對手持設備優化，主要是針對一些老的不識別viewport的瀏覽器，比如黑莓 -->
+	<meta name="HandheldFriendly" content="true">
+	<!-- 微軟的老式瀏覽器 -->
+	<meta name="MobileOptimized" content="320">
+	<!-- uc強制豎屏 -->
+	<meta name="screen-orientation" content="portrait">
+	<!-- QQ強制豎屏 -->
+	<meta name="x5-orientation" content="portrait">
+	<!-- UC強制全屏 -->
+	<meta name="full-screen" content="yes">
+	<!-- QQ強制全屏 -->
+	<meta name="x5-fullscreen" content="true">
+	<!-- UC應用模式 -->
+	<meta name="browsermode" content="application">
+	<!-- QQ應用模式 -->
+	<meta name="x5-page-mode" content="app">
+	<!-- windows phone 點擊無高光 -->
+	<meta name="msapplication-tap-highlight" content="no">
+	<!-- 適應移動端end -->
+	<title>lipstick_webui</title>
+	<link rel="shortcut icon" href="./images/icon.png" />
+	<link rel="stylesheet" href="./css/frameui.css" />
+	<link rel="stylesheet" href="./css/index.css" />
+</head>
+
+<body id="login-body">
+	<div id="register-b">
+		<!--html5 nav-->
+		<!-- <nav class="j-nav navbar">
+			<div class="logo fl">
+				<a href="./user.html"></a>
+			</div>
+			<span class="user-title">登錄</span>
+			<div class="registerBtn">
+				<a href="./register.html">註冊</a>
+			</div>
+		</nav> -->
+		<div class="user-avatar">
+			<div class="m-user-avatar text-center">
+				<span class="avatarPic"><img style="display: inline;" class="lazy img-circle" src="./images/user-img0.jpg"></span>
+			</div>
+			<div class="register-box section-top">
+				<!-- <form class="am-form" method="post" id="doc-vld-msg">
+					<fieldset>
+						<div class="am-form-group">
+							<label for="doc-ipt-3" class="am-u-sm-2 j-form-label">
+								<span class="registericon registericon-user"></span>
+							</label>
+							<input type="text" id="doc-vld-name-2-1" placeholder="用戶名/郵箱" data-validation-message="請輸入用戶名或登錄郵箱" required />
+						</div>
+
+						<div class="am-form-group">
+							<label for="doc-vld-pwd-1" class="am-u-sm-2 j-form-label">
+								<span class="registericon registericon-password"></span>
+							</label>
+							<input type="password" id="doc-vld-pwd-1" data-validation-message="請輸入密碼" placeholder="請輸入密碼" required />
+						</div>
+						<button class="btn am-btn am-btn-secondary" type="submit">登 錄</button>
+					</fieldset>
+				</form> -->
+				<button id="fb-login" class="btn am-btn am-btn-secondary fb-login-btn loading-hide" type="submit" onclick="login()">Facebook 登錄</button>
+				<!-- <div class="text-right">
+					<a href=".//login/forgetps" class="m-login-link">忘記密碼？</a>
+				</div> -->
+				<div class="loading-show"><img src="/images/loading.gif" alt=""></div>
+			</div>
+		</div>
+	</div>
+	<!--引入js資源-->
+	<script src="./js/jquery.min.js"></script>
+	<script src="./js/amazeui.js"></script>
+	<script src="./js/handlebars.min.js"></script>
+	<script src="./js/amazeui.widgets.helper.js"></script>
+	<script src="./js/login.js"></script>
+	<script src="./cordova.js"></script>
+	<script src="/js/index.js"></script>
+	<script type="text/javascript">
+		var login = function () {
+			$(document).ready(function () {
+				$("input[type=submit]").attr("disabled", "disabled");
+				while (true) {
+					if (window.facebookConnectPlugin !== undefined) {
+						break;
+					};
+					console.log('wait facebookConnectPlugin');
+				}
+				try {
+					facebookConnectPlugin.login(["email"],
+						function (response) {
+							localStorage.setItem('short_access_token', response.authResponse.accessToken);
+							var short_access_token = localStorage.getItem('short_access_token');
+							$.ajax(
+								settings = {
+									url: '/api/facebook/exchange',
+									data: JSON.stringify({
+										'access_token': short_access_token
+									}),
+									contentType: 'application/json',
+									// converters: {
+									// 	'text json': window.String,
+									// },
+									type: 'post',
+									beforeSend: function (jqXHR, settings) {
+										// jqXHR.setRequestHeader('Content-Type', 'applicaion/json');
+										jqXHR.setRequestHeader('Accept', 'applicaion/json');
+										// jqXHR.setRequestHeader('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZGRyZXNzIjpudWxsLCJleHAiOjE1NDkxMTA3NDMsImlhdCI6MTU0ODUwNTk0MywiaWQiOjEsIm5pY2tuYW1lIjoi56S65L6L5pi156ewIiwicGhvbmUiOm51bGwsInJlY2VpdmVyIjpudWxsLCJ1c2VybmFtZSI6ImV4YW1wbGUifQ.FED88CCEB5AF59B664CC47F945EAAA89ACF1462724FB3007415E6C85480A6BCF');
+									}
+								}
+							).done(function (response, textStatus, jqXHR) {
+								var result_text = jqXHR.responseText;
+								var result_json = JSON.parse(result_text);
+								var result_user = result_json.result.result;
+								var result_user_ = JSON.stringify(result_user);
+								if (result_json.status != 0) {
+									alert(result_json.message);
+									window.location.href = "/login.html";
+								} else {
+									var user_ = JSON.stringify(result_user);
+									localStorage.setItem("user", user_);
+									var user_token = localStorage.getItem('user');
+									window.location.href = "/";
+								}
+							}).fail(function (jqXHR, textStatus, errorThrown) {
+								alert(textStatus);
+								alert('' + errorThrown);
+							}).always(function (data_jqXHR, textStatus, jqXHR_errorThrown) {
+							});
+						},
+						function (response) {
+							alert(JSON.stringify(response))
+						});
+				} catch (e) {
+					alert('failed to call facebookConnectPlugin.login: ' + e);
+				} finally {
+				};
+			})
+		};
+
+		// var print = function (o) {
+		// 	if (o === undefined) {
+		// 		return '<undefined>';
+		// 	};
+		// 	if (o === null) {
+		// 		return '<null>';
+		// 	};
+		// 	var str = '';
+
+		// 	for (var p in o) {
+		// 		if (typeof o[p] == 'string') {
+		// 			str += p + ': ' + o[p] + '; </br>';
+		// 		} else {
+		// 			if (p == o) {
+		// 				str += '[' + p + ']';
+		// 			} else {
+		// 				str += p + ': { </br>' + print(o[p]) + '}';
+		// 			};
+		// 		};
+		// 		console.log(str);
+		// 	};
+
+		// 	return str;
+		// };
+	</script>
+</body>
+
+</html>
